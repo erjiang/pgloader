@@ -242,3 +242,11 @@
         (format nil
                 "~d-~2,'0d-~2,'0d ~2,'0d:~2,'0d:~2,'0dZ"
                 year month date hour minute second)))))
+
+(defun doublemap-hmac-status (hmac-status)
+  (when hmac-status
+    (cond
+      ((equal hmac-status "non") "none")
+      ((equal hmac-status "ok") "valid")
+      ((equal hmac-status "bad") "invalid")
+      (t "none"))))
