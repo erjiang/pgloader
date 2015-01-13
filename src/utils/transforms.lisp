@@ -227,3 +227,18 @@
 
                    (t
                     date-string-or-integer)))))))
+
+(defun unix-timestamp-to-timestamptz (unixtime-string)
+  "Takes a unix timestamp (seconds since beginning of 1970) and converts it
+  into a string of format \"YYYY-MM-DD hh:mm:ssZ\".
+
+  Assumes that unix timestamp is UTC time."
+  (when unixtime-string
+    (let ((unixtime (ensure-parse-integer unixtime-string)))
+      (multiple-value-bind
+        (second minute hour date month year)
+        ;; 2208988800 is the difference between unix and universal time epoch
+        (decode-universal-time (+ unixtime 2208988800) 0)
+        (format nil
+                "~d-~2,'0d-~2,'0d ~2,'0d:~2,'0d:~2,'0dZ"
+                year month date hour minute second)))))
