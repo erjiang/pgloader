@@ -3,7 +3,7 @@ APP_NAME   = pgloader
 VERSION    = 3.1.1
 
 # use either sbcl or ccl
-CL	   = sbcl
+CL	   = ccl
 
 # default to 4096 MB of RAM size in the image
 DYNSIZE    = 4096
